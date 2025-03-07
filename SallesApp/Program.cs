@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SallesApp.Context;
+using SallesApp.Repositories;
+using SallesApp.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+
 
 var app = builder.Build();
 

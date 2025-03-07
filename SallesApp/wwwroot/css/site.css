@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.carousel-item {
+    height: 620px;
+    width: 100%;
+}
+    .carousel-item img {
+        height: 100%;
+        object-fit:cover;
+    }

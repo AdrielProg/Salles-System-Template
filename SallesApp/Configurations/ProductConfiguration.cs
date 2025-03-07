@@ -16,7 +16,9 @@
                 builder.Property(p => p.Price).IsRequired();
                 builder.Property(p => p.ShortDescription).HasMaxLength(150);
                 builder.Property(p => p.LongDescription).HasMaxLength(300);
+              //  builder.Property(p => p.IsFavoriteProduct).HasDefaultValue(false); 
                 builder.Property(p => p.IsAvailable).HasDefaultValue(true);
+             
 
                 builder.HasOne(p => p.ProductCategory).WithMany(p => p.Products).HasForeignKey(p => p.ProductCategoryId);
             }

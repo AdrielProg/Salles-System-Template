@@ -11,7 +11,7 @@ using SallesApp.Context;
 namespace SallesApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250307023709_init")]
+    [Migration("20250307142025_init")]
     partial class init
     {
         /// <inheritdoc />

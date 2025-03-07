@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using SallesApp.Context;
 
 #nullable disable
 
@@ -50,6 +51,30 @@ namespace SallesApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: nameof(ApplicationDbContext.ProductCategories),
+                columns: new[] { "Id", "Name", "Description" },
+                values: new object[,] {
+                        { (short)1, "Hamburguer", "Sanduíches e Lanches" },
+                        { (short)2, "Pizza", "Tudo acaba em PIZZA" },
+                        { (short)3, "Bebida", "Vitaminas, sucos e refrigerantes" }
+              });
+
+            migrationBuilder.InsertData(
+                table: nameof(ApplicationDbContext.Products),
+                columns: new[] { "Id", "ProductCategoryId", "Name", "Price", "ShortDescription", "LongDescription" },
+                values: new object[,] {
+                                { 1, (short)1, "MonsterBurgue", 20.99d, "Hamburguer gigantesco", "Para matar fomes monstruosas" },
+                                { 2, (short)1, "CheeseBacon", 18.50d, "Clássico com bacon", "Queijo derretido e bacon crocante" },
+                                { 3, (short)1, "VeggieBurgue", 16.99d, "Opção vegetariana", "Feito com ingredientes naturais e saudáveis" },
+                                { 4, (short)2, "Calabresa", 35.99d, "Tradicional calabresa", "Queijo, molho e calabresa especial" },
+                                { 5, (short)2, "4 Queijos", 38.50d, "Delícia para os amantes de queijo", "Combinação irresistível de queijos selecionados" },
+                                { 6, (short)2, "Frango com Catupiry", 39.99d, "Clássico do Brasil", "Frango desfiado com catupiry original" },
+                                { 7, (short)3, "Suco de Laranja", 8.99d, "Natural e saudável", "Suco feito com laranjas frescas" },
+                                { 8, (short)3, "Refrigerante Cola", 6.50d, "Refrescante e gaseificado", "O clássico refrigerante de cola" },
+                                { 9, (short)3, "Milkshake de Chocolate", 12.99d, "Cremosidade e sabor", "Feito com sorvete e calda de chocolate premium" }
+                             });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductCategoryId",
