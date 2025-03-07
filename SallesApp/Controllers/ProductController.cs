@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SallesApp.ViewModel;
 using SallesApp.Repositories.Interfaces;
 
 namespace SallesApp.Controllers
@@ -14,7 +15,12 @@ namespace SallesApp.Controllers
 
         public IActionResult List()
         {
-            return View(_productRepository.Products);
+            var productListViewModel = new ProductListViewModel();
+            
+            productListViewModel.Products = _productRepository.Products.ToList();
+            productListViewModel.CurrentCategory = "Current";
+
+            return View(productListViewModel);
         }
     }
 }
