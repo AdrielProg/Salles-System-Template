@@ -12,7 +12,7 @@ namespace SallesApp.Configurations
             builder.ToTable(nameof(ApplicationDbContext.ShoppingCarts));
             builder.HasKey(x => x.ShoppingCartId);
 
-            builder.HasMany(x => x.itensShoppingCart).WithOne(x => x.ShoppingCart).HasForeignKey(x => x.ShoppingCartId);
+            builder.HasMany(x => x.shoppingCartItens).WithOne(x => x.ShoppingCart).HasForeignKey(x => x.ShoppingCartId);
         }
 
     }

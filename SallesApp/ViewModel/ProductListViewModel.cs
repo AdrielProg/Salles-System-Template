@@ -1,14 +1,25 @@
 ﻿using SallesApp.Models;
+using SallesApp.Services.Interfaces;
 
 namespace SallesApp.ViewModel
 {
-    public class ProductListViewModel
+    public class ProductListViewModel : Product
     {
-        public List<Product> Products { get; set; }
 
-        public List<ProductCategory> Categories { get; set; }
+        public ProductListViewModel() { }
+        public ProductListViewModel(Product product, IEncryptionService encryptionService)
+        {
         
-        public string CurrentCategory { get; set; }
-        
+            Id = encryptionService.Encrypt(product.Id.ToString());
+            Name = product.Name;
+            IsAvailable = product.IsAvailable;
+            Price = product.Price;
+            ShortDescription = product.ShortDescription;
+            LongDescription = product.LongDescription;
+            ImageUrl = product.ImageUrl;
+        }
+
+        public new string Id { get; set; }
+        public List<ProductListViewModel> Products { get; set; }
     }
 }

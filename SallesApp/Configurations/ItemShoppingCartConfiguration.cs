@@ -5,11 +5,11 @@ using SallesApp.Models;
 
 namespace SallesApp.Configurations
 {
-    public class ItemShoppingCartConfiguration : IEntityTypeConfiguration<ItemShoppingCart>
+    public class ShoppingCartItemConfiguration : IEntityTypeConfiguration<ShoppingCartItem>
     {
-        public void Configure(EntityTypeBuilder<ItemShoppingCart> builder) 
+        public void Configure(EntityTypeBuilder<ShoppingCartItem> builder) 
         { 
-            builder.ToTable(nameof(ApplicationDbContext.ItemShoppingCarts));
+            builder.ToTable(nameof(ApplicationDbContext.ShoppingCartItems));
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ShoppingCartId).HasMaxLength(200);
             builder.Property(x => x.Quantity);

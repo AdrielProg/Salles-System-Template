@@ -8,7 +8,7 @@ namespace SallesApp.Repositories.Interfaces
         void RemoveProduct(string shoppingCartId, Product product);
         void RemoveAllProducts(string shoppingCartId);
         decimal GetTotalPrice(string shoppingCartId);
-        List<ItemShoppingCart> GetAllItens(string shoppingCartId);
+        List<ShoppingCartItem> GetAllItens(string shoppingCartId);
 
     }
 }

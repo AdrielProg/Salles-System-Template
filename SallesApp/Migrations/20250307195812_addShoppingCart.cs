@@ -12,7 +12,7 @@ namespace SallesApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ItemShoppingCarts",
+                name: "ShoppingCartItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -23,17 +23,17 @@ namespace SallesApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemShoppingCarts", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingCartItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ItemShoppingCarts_Products_ProductId",
+                        name: "FK_ShoppingCartItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemShoppingCarts_ProductId",
-                table: "ItemShoppingCarts",
+                name: "IX_ShoppingCartItems_ProductId",
+                table: "ShoppingCartItems",
                 column: "ProductId");
         }
 
@@ -41,7 +41,7 @@ namespace SallesApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ItemShoppingCarts");
+                name: "ShoppingCartItems");
         }
     }
 }

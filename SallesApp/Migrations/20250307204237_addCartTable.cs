@@ -22,13 +22,13 @@ namespace SallesApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemShoppingCarts_ShoppingCartId",
-                table: "ItemShoppingCarts",
+                name: "IX_ShoppingCartItems_ShoppingCartId",
+                table: "ShoppingCartItems",
                 column: "ShoppingCartId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ItemShoppingCarts_ShoppingCarts_ShoppingCartId",
-                table: "ItemShoppingCarts",
+                name: "FK_ShoppingCartItems_ShoppingCarts_ShoppingCartId",
+                table: "ShoppingCartItems",
                 column: "ShoppingCartId",
                 principalTable: "ShoppingCarts",
                 principalColumn: "ShoppingCartId");
@@ -38,15 +38,15 @@ namespace SallesApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ItemShoppingCarts_ShoppingCarts_ShoppingCartId",
-                table: "ItemShoppingCarts");
+                name: "FK_ShoppingCartItems_ShoppingCarts_ShoppingCartId",
+                table: "ShoppingCartItems");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCarts");
 
             migrationBuilder.DropIndex(
-                name: "IX_ItemShoppingCarts_ShoppingCartId",
-                table: "ItemShoppingCarts");
+                name: "IX_ShoppingCartItems_ShoppingCartId",
+                table: "ShoppingCartItems");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SallesApp.ViewModel;
 using SallesApp.Repositories.Interfaces;
-using SallesApp.Services;
 using SallesApp.Services.Interfaces;
 
 namespace SallesApp.Controllers
@@ -28,17 +27,23 @@ namespace SallesApp.Controllers
             if (categoryId != null && decryptedCategoryId == null)
                 return BadRequest("Categoria inválida.");
 
+            var products = decryptedCategoryId.HasValue
+                ? _productRepository.Products.Where(p => p.ProductCategoryId == decryptedCategoryId.Value).ToList()
+                : _productRepository.Products.ToList();
+
+            var productListViewModels = products.Select(p => new ProductListViewModel(p, _encryptionService)).ToList();
+
+            ViewBag.Categories = _categoryRepository.Categories
+                .Select(c => new { Id = _encryptionService.Encrypt(c.Id.ToString()), c.Name })
+                .ToList();
+
+            var categories = (IEnumerable<dynamic>)ViewBag.Categories;
+            TempData["CurrentCategory"] = categories.Where(c => c.Id == categoryId)
+                                        .FirstOrDefault()?.Name ?? "Todos os produtos";
+
             var productListViewModel = new ProductListViewModel
             {
-                Products = decryptedCategoryId.HasValue
-                    ? _productRepository.Products.Where(p => p.ProductCategoryId == decryptedCategoryId.Value).ToList()
-                    : _productRepository.Products.ToList(),
-
-                Categories = _categoryRepository.Categories.ToList(),
-
-                CurrentCategory = decryptedCategoryId.HasValue
-                    ? _categoryRepository.Categories.FirstOrDefault(c => c.Id == decryptedCategoryId.Value)?.Name ?? "Categoria não encontrada"
-                    : "Todas as Categorias"
+                Products = productListViewModels
             };
 
             return View(productListViewModel);

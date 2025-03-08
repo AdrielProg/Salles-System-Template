@@ -22,58 +22,58 @@ namespace SallesApp.Repositories
 
         public void AddProduct(string shoppingCartId, Product product)
         {
-            var itemShoppingCart = _context.ItemShoppingCarts
+            var ShoppingCartItem = _context.ShoppingCartItems
                 .SingleOrDefault(sc => sc.Product.Id == product.Id && sc.ShoppingCartId == shoppingCartId);
 
-            if (itemShoppingCart == null)
+            if (ShoppingCartItem == null)
             {
-                itemShoppingCart = new ItemShoppingCart
+                ShoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = shoppingCartId,
                     Product = product,
                     Quantity = 1
                 };
-                _context.ItemShoppingCarts.Add(itemShoppingCart);
+                _context.ShoppingCartItems.Add(ShoppingCartItem);
             }
             else
             {
-                itemShoppingCart.Quantity++;
+                ShoppingCartItem.Quantity++;
             }
             _context.SaveChanges();
         }        
         
         public void RemoveProduct(string shoppingCartId, Product product)
         {
-            var itemShoppingCart = _context.ItemShoppingCarts
+            var ShoppingCartItem = _context.ShoppingCartItems
                 .SingleOrDefault(sc => sc.Product.Id == product.Id &&
                  sc.ShoppingCartId == shoppingCartId);
 
-            if (itemShoppingCart != null)
+            if (ShoppingCartItem != null)
             {
-                if (itemShoppingCart.Quantity > 1)
-                    itemShoppingCart.Quantity--;
+                if (ShoppingCartItem.Quantity > 1)
+                    ShoppingCartItem.Quantity--;
 
-                else _context.ItemShoppingCarts.Remove(itemShoppingCart);
+                else _context.ShoppingCartItems.Remove(ShoppingCartItem);
                 
             }
             _context.SaveChanges();
         }
 
-        public List<ItemShoppingCart> GetAllItens(string shoppingCartId)
+        public List<ShoppingCartItem> GetAllItens(string shoppingCartId)
         {
             if (string.IsNullOrEmpty(shoppingCartId))
             {
                 throw new ArgumentException("O ID do carrinho de compras não pode ser nulo ou vazio.", nameof(shoppingCartId));
             }
 
-            var itens = _context.ItemShoppingCarts
+            var itens = _context.ShoppingCartItems
                 .Where(sc => sc.ShoppingCartId == shoppingCartId)
                 .Include(sc => sc.Product)
                 .ToList();
 
             if (itens == null || !itens.Any())
             {
-                return new List<ItemShoppingCart>();
+                return new List<ShoppingCartItem>();
             }
 
             return itens;
@@ -81,10 +81,10 @@ namespace SallesApp.Repositories
 
         public void RemoveAllProducts(string shoppingCartId)
         {
-            var itensShoppingCart = _context.ItemShoppingCarts
+            var shoppingCartItens = _context.ShoppingCartItems
                                     .Where(sc => sc.ShoppingCartId == shoppingCartId);
 
-                _context.ItemShoppingCarts.RemoveRange(itensShoppingCart);
+                _context.ShoppingCartItems.RemoveRange(shoppingCartItens);
                 _context.SaveChanges();
 
                                     
@@ -92,7 +92,7 @@ namespace SallesApp.Repositories
 
         public decimal GetTotalPrice(string shoppingCartId)
         {
-            return _context.ItemShoppingCarts.Where(sc => sc.ShoppingCartId == shoppingCartId)
+            return _context.ShoppingCartItems.Where(sc => sc.ShoppingCartId == shoppingCartId)
                                              .Select(x => x.Product.Price * x.Quantity)
                                              .Sum();
         }
