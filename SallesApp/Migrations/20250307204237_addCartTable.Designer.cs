@@ -24,7 +24,7 @@ namespace SallesApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SallesApp.Models.ItemShoppingCart", b =>
+            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace SallesApp.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("ItemShoppingCarts");
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("SallesApp.Models.Product", b =>
@@ -127,14 +127,14 @@ namespace SallesApp.Migrations
                     b.ToTable("ShoppingCarts");
                 });
 
-            modelBuilder.Entity("SallesApp.Models.ItemShoppingCart", b =>
+            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
                 {
                     b.HasOne("SallesApp.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
 
                     b.HasOne("SallesApp.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("itensShoppingCart")
+                        .WithMany("shoppingCartItens")
                         .HasForeignKey("ShoppingCartId");
 
                     b.Navigation("Product");
@@ -160,7 +160,7 @@ namespace SallesApp.Migrations
 
             modelBuilder.Entity("SallesApp.Models.ShoppingCart", b =>
                 {
-                    b.Navigation("itensShoppingCart");
+                    b.Navigation("shoppingCartItens");
                 });
 #pragma warning restore 612, 618
         }

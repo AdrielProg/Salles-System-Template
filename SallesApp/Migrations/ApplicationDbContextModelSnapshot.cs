@@ -21,32 +21,6 @@ namespace SallesApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SallesApp.Models.ItemShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("ItemShoppingCarts");
-                });
-
             modelBuilder.Entity("SallesApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -124,19 +98,30 @@ namespace SallesApp.Migrations
                     b.ToTable("ShoppingCarts");
                 });
 
-            modelBuilder.Entity("SallesApp.Models.ItemShoppingCart", b =>
+            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("SallesApp.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.HasOne("SallesApp.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("itensShoppingCart")
-                        .HasForeignKey("ShoppingCartId");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Navigation("Product");
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
 
-                    b.Navigation("ShoppingCart");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ShoppingCartId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("SallesApp.Models.Product", b =>
@@ -150,6 +135,21 @@ namespace SallesApp.Migrations
                     b.Navigation("ProductCategory");
                 });
 
+            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("SallesApp.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("SallesApp.Models.ShoppingCart", "ShoppingCart")
+                        .WithMany("shoppingCartItens")
+                        .HasForeignKey("ShoppingCartId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ShoppingCart");
+                });
+
             modelBuilder.Entity("SallesApp.Models.ProductCategory", b =>
                 {
                     b.Navigation("Products");
@@ -157,7 +157,7 @@ namespace SallesApp.Migrations
 
             modelBuilder.Entity("SallesApp.Models.ShoppingCart", b =>
                 {
-                    b.Navigation("itensShoppingCart");
+                    b.Navigation("shoppingCartItens");
                 });
 #pragma warning restore 612, 618
         }

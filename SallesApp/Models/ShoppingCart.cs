@@ -4,7 +4,7 @@ namespace SallesApp.Models
     public class ShoppingCart
     {
         public string ShoppingCartId { get; set; }
-        public List<ItemShoppingCart> itensShoppingCart { get; set; } = new List<ItemShoppingCart>();
+        public List<ShoppingCartItem> shoppingCartItens { get; set; } = new List<ShoppingCartItem>();
 
         public static ShoppingCart GetShoppingCart(IServiceProvider services)
         {

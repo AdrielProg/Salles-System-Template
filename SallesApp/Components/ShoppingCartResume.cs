@@ -21,13 +21,13 @@ namespace SallesApp.Components
             var itens = _shoppingCartRepository.GetAllItens(_shoppingCart.ShoppingCartId);
 
 /*           TEST
- *           var itens = new List<ItemShoppingCart> 
+ *           var itens = new List<ShoppingCartItem> 
             {
-                new ItemShoppingCart(),
-                new ItemShoppingCart()
+                new ShoppingCartItem(),
+                new ShoppingCartItem()
             };*/
 
-            _shoppingCart.itensShoppingCart = itens;
+            _shoppingCart.shoppingCartItens = itens;
 
             var ShoppingCartVM = new ShoppingCartViewModel
             {

@@ -1,6 +1,6 @@
 ﻿namespace SallesApp.Models
 {
-    public class ItemShoppingCart
+    public class ShoppingCartItem
     {
         public int Id { get; set; }
         public Product Product { get; set; }

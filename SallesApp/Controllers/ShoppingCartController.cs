@@ -22,7 +22,7 @@ namespace SallesApp.Controllers
         public IActionResult Index()
         { 
             var itens = _shoppingCartRepository.GetAllItens(_shoppingCart.ShoppingCartId);
-            _shoppingCart.itensShoppingCart = itens;
+            _shoppingCart.shoppingCartItens = itens;
 
             var ShoppingCartVM = new ShoppingCartViewModel
             {

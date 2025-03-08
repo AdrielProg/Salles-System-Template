@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SallesApp.ViewModel;
 using SallesApp.Repositories.Interfaces;
-using SallesApp.Services;
 using SallesApp.Services.Interfaces;
 
 namespace SallesApp.Controllers
@@ -21,24 +20,33 @@ namespace SallesApp.Controllers
             _categoryRepository = categoryRepository;
             _encryptionService = encryptionService;
         }
-
-        public IActionResult List(string categoryId)
+        [HttpGet]
+        [Route("product/list/{categoryId?}")]
+        public IActionResult List(string categoryId = null)
         {
             int? decryptedCategoryId = _encryptionService.TryDecryptToInt(categoryId);
             if (categoryId != null && decryptedCategoryId == null)
                 return BadRequest("Categoria inválida.");
 
+            var products = decryptedCategoryId.HasValue
+                ? _productRepository.Products.Where(p => p.ProductCategoryId == decryptedCategoryId.Value).ToList()
+                : _productRepository.Products.ToList();
+
+            var productListViewModels = products.Select(p => new ProductListViewModel(p, _encryptionService)).ToList();
+        
+            var categories = _categoryRepository.Categories;
+
+
+            ViewBag.Categories = categories                
+                    .Select(c => new { Id = _encryptionService.Encrypt(c.Id.ToString()), c.Name })
+                    .ToList();
+            
+            ViewBag.CurrentCategory = categories.Where(c => c.Id == decryptedCategoryId).Select(c => c.Name).FirstOrDefault() ?? "Todos os produtos"; 
+
+
             var productListViewModel = new ProductListViewModel
             {
-                Products = decryptedCategoryId.HasValue
-                    ? _productRepository.Products.Where(p => p.ProductCategoryId == decryptedCategoryId.Value).ToList()
-                    : _productRepository.Products.ToList(),
-
-                Categories = _categoryRepository.Categories.ToList(),
-
-                CurrentCategory = decryptedCategoryId.HasValue
-                    ? _categoryRepository.Categories.FirstOrDefault(c => c.Id == decryptedCategoryId.Value)?.Name ?? "Categoria não encontrada"
-                    : "Todas as Categorias"
+                Products = productListViewModels
             };
 
             return View(productListViewModel);
