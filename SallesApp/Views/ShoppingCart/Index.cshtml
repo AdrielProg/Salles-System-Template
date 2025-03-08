@@ -1,0 +1,48 @@
+﻿@model ShoppingCartViewModel
+
+<div class="container">
+    <div class="row">
+
+        <div>Seu Carrinho</div>
+
+       <table class="table table-bordered table-striped">
+            <thead>
+               <tr>
+                    <th>Quantidade</th>
+                    <th>Lanche</th>
+                    <th class="text-right">Preco</th>
+                    <th class="text-right">SubTotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.itensShoppingCart)
+                {
+                    <tr>
+                        <td class="text-center" >@item.Quantity</td>
+                        <td class="text-left" >@item.Product.Name</td>
+                        <td class="text-right" >@item.Product.Price</td>
+                        <td class="text-right" >@((item.Product.Price * item.Quantity).ToString("c"))</td>
+                        <td class="text-center text-black">
+                            <a asp-controller="ShoppingCart" asp-action="RemoveProductToCart"
+                             asp-route-productId="@item.Product.Id" class="text-black">X</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total</td>
+                    <td>@Model.TotalPrice.ToString("c")</td>
+                </tr>
+            </tfoot>    
+        </table>
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Encerrar Pedido</a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-primary" asp-controller="Product" asp-action="List">Continuar Comprando</a>
+            </div>
+        </div>
+    </div>
+</div>
