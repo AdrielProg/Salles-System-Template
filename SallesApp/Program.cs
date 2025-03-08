@@ -3,6 +3,8 @@ using SallesApp.Context;
 using SallesApp.Models;
 using SallesApp.Repositories;
 using SallesApp.Repositories.Interfaces;
+using SallesApp.Services;
+using SallesApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
 
