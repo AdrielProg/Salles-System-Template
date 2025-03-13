@@ -63,17 +63,17 @@ namespace SallesApp.Migrations
 
             migrationBuilder.InsertData(
                 table: nameof(ApplicationDbContext.Products),
-                columns: new[] { "Id", "ProductCategoryId", "Name", "Price", "ShortDescription", "LongDescription" },
+                columns: new[] { "Id", "ProductCategoryId", "Name", "Price", "ShortDescription", "LongDescription", "ImageUrl" },
                 values: new object[,] {
-                                { 1, (short)1, "MonsterBurgue", 20.99d, "Hamburguer gigantesco", "Para matar fomes monstruosas" },
-                                { 2, (short)1, "CheeseBacon", 18.50d, "Clássico com bacon", "Queijo derretido e bacon crocante" },
-                                { 3, (short)1, "VeggieBurgue", 16.99d, "Opção vegetariana", "Feito com ingredientes naturais e saudáveis" },
-                                { 4, (short)2, "Calabresa", 35.99d, "Tradicional calabresa", "Queijo, molho e calabresa especial" },
-                                { 5, (short)2, "4 Queijos", 38.50d, "Delícia para os amantes de queijo", "Combinação irresistível de queijos selecionados" },
-                                { 6, (short)2, "Frango com Catupiry", 39.99d, "Clássico do Brasil", "Frango desfiado com catupiry original" },
-                                { 7, (short)3, "Suco de Laranja", 8.99d, "Natural e saudável", "Suco feito com laranjas frescas" },
-                                { 8, (short)3, "Refrigerante Cola", 6.50d, "Refrescante e gaseificado", "O clássico refrigerante de cola" },
-                                { 9, (short)3, "Milkshake de Chocolate", 12.99d, "Cremosidade e sabor", "Feito com sorvete e calda de chocolate premium" }
+                                { 1, (short)1, "MonsterBurgue", 20.99d, "Hamburguer gigantesco", "Para matar fomes monstruosas", "https://img.freepik.com/premium-photo/hamburger-with-cheese-lettuce-cutting-board_917118-340.jpg" },
+                                { 2, (short)1, "CheeseBacon", 18.50d, "Clássico com bacon", "Queijo derretido e bacon crocante", "https://img.freepik.com/premium-photo/fresh-delicious-cheeseburger-fries-are-black-dark-background_6724-4248.jpg" },
+                                { 3, (short)1, "VeggieBurgue", 16.99d, "Opção vegetariana", "Feito com ingredientes naturais e saudáveis", "https://s2.glbimg.com/jqfaCA6V4Yb2xgU1JzPD200Kaxk=/smart/e.glbimg.com/og/ed/f/original/2018/07/20/matilda_vegano_wellington_nemeth_1.jpg" },
+                                { 4, (short)2, "Calabresa", 35.99d, "Tradicional calabresa", "Queijo, molho e calabresa especial", "https://vovozitareceitas.com/wp-content/uploads/2020/09/pizza-calabresa.jpg" },
+                                { 5, (short)2, "4 Queijos", 38.50d, "Delícia para os amantes de queijo", "Combinação irresistível de queijos selecionados", "https://2.bp.blogspot.com/-xbyp3-N-RKI/UqYP85GPmNI/AAAAAAAAANQ/ln99qi0bmLI/s1600/pizza+de+frango.jpg" },
+                                { 6, (short)2, "Frango com Catupiry", 39.99d, "Clássico do Brasil", "Frango desfiado com catupiry original", "https://www.sabornamesa.com.br/media/k2/items/cache/ada34cd2101afafaba465aad112ee3c1_M.jpg"},
+                                { 7, (short)3, "Suco de Laranja", 8.99d, "Natural e saudável", "Suco feito com laranjas frescas", "https://thumbs.dreamstime.com/b/orange-juice-12008430.jpg" },
+                                { 8, (short)3, "Refrigerante Cola", 6.50d, "Refrescante e gaseificado", "O clássico refrigerante de cola", "https://blogdapublicidade.com/wp-content/uploads/2024/04/historia-logotipo-coca-cola-1000x600.jpg" },
+                                { 9, (short)3, "Milkshake de Chocolate", 12.99d, "Cremosidade e sabor", "Feito com sorvete e calda de chocolate premium","https://64.media.tumblr.com/944d41bd9e770bdef0596dcd60c17888/tumblr_o4dx9oixro1sn5m44o2_1280.jpg" }
                              });
 
             migrationBuilder.CreateIndex(
