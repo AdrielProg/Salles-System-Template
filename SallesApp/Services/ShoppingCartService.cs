@@ -1,29 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+
 using SallesApp.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace SallesApp.Models
 {
-    public class ShoppingCart
+    public class ShoppingCartService
     {
         private readonly ApplicationDbContext _context;
         public string ShoppingCartId { get; set; }
         public List<ShoppingCartItem> shoppingCartItens { get; set; } = new List<ShoppingCartItem>();
 
-        public ShoppingCart() 
+        public ShoppingCartService() 
         {
         }
 
-        public ShoppingCart(ApplicationDbContext context)
+        public ShoppingCartService(ApplicationDbContext context)
         {
             _context = context;
         }
     
-        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        public static ShoppingCartService GetShoppingCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = services.GetRequiredService<ApplicationDbContext>();
@@ -31,18 +29,8 @@ namespace SallesApp.Models
             // Obter ou criar ID do carrinho na sessão
             string cartId = session.GetString("ShoppingCartId") ?? Guid.NewGuid().ToString();
             session.SetString("ShoppingCartId", cartId);
-            
-            // Verificar se o carrinho já existe no banco de dados
-            var cartExists = context.ShoppingCarts.Any(c => c.ShoppingCartId == cartId);
-            
-            if (!cartExists)
-            {
-                var newCart = new ShoppingCart { ShoppingCartId = cartId };
-                context.ShoppingCarts.Add(newCart);
-                context.SaveChanges();
-            }
  
-            return new ShoppingCart(context) 
+            return new ShoppingCartService(context) 
             {
                  ShoppingCartId = cartId 
             };
@@ -72,20 +60,6 @@ namespace SallesApp.Models
             _context.SaveChanges();
         }
         
-        private void EnsureCartExists()
-        {
-            if (_context == null)
-            {
-                throw new InvalidOperationException("Context não foi inicializado corretamente");
-            }
-            
-            var cartExists = _context.ShoppingCarts.Any(c => c.ShoppingCartId == ShoppingCartId);
-            if (!cartExists)
-            {
-                _context.ShoppingCarts.Add(new ShoppingCart { ShoppingCartId = ShoppingCartId });
-                _context.SaveChanges();
-            }
-        }
 
         public int RemoveProduct(Product product)
         {
@@ -120,7 +94,7 @@ namespace SallesApp.Models
                 .ToList() ?? new List<ShoppingCartItem>();
         }
 
-        public void RemoveAllProducts()
+        public void ClearCart()
         {
             var shoppingCartItens = _context.ShoppingCartItems
                                     .Where(sc => sc.ShoppingCartId == ShoppingCartId);

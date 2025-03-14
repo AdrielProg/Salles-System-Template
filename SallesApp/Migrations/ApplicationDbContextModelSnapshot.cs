@@ -88,16 +88,6 @@ namespace SallesApp.Migrations
                     b.ToTable("ProductCategories", (string)null);
                 });
 
-            modelBuilder.Entity("SallesApp.Models.ShoppingCart", b =>
-                {
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("text");
-
-                    b.HasKey("ShoppingCartId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
             modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("Id")
@@ -119,8 +109,6 @@ namespace SallesApp.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ShoppingCartId");
-
                     b.ToTable("ShoppingCartItems");
                 });
 
@@ -141,23 +129,12 @@ namespace SallesApp.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
-                    b.HasOne("SallesApp.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("shoppingCartItens")
-                        .HasForeignKey("ShoppingCartId");
-
                     b.Navigation("Product");
-
-                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("SallesApp.Models.ProductCategory", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("SallesApp.Models.ShoppingCart", b =>
-                {
-                    b.Navigation("shoppingCartItens");
                 });
 #pragma warning restore 612, 618
         }

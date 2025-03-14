@@ -11,21 +11,19 @@ namespace SallesApp.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ShoppingCart _shoppingCart;
+        private readonly ShoppingCartService _shoppingCart;
         private readonly IEncryptionService _encryptionService;
         private readonly IProductRepository _productRepository;
-        private readonly IServiceProvider _serviceProvider;
 
         public ShoppingCartController(
             IEncryptionService encryptionService, 
             IProductRepository productRepository,
             IServiceProvider serviceProvider, 
-            ShoppingCart shoppingCart)
+            ShoppingCartService shoppingCart)
         {
             _shoppingCart = shoppingCart;
             _encryptionService = encryptionService;
             _productRepository = productRepository;
-            _serviceProvider = serviceProvider;
         }
 
         public IActionResult Index()
@@ -69,7 +67,7 @@ namespace SallesApp.Controllers
         
         public IActionResult ClearCart()
         {
-            _shoppingCart.RemoveAllProducts();
+            _shoppingCart.ClearCart();
             return RedirectToAction("Index");
         }
     }

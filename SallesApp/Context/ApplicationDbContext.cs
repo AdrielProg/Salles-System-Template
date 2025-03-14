@@ -14,7 +14,6 @@ namespace SallesApp.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems{ get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

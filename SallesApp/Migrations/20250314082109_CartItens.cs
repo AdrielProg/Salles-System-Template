@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SallesApp.Migrations
 {
     /// <inheritdoc />
-    public partial class addShoppingCart : Migration
+    public partial class CartItens : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

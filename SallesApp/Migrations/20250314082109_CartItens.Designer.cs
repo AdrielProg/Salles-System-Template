@@ -11,8 +11,8 @@ using SallesApp.Context;
 namespace SallesApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250307195812_addShoppingCart")]
-    partial class addShoppingCart
+    [Migration("20250314082109_CartItens")]
+    partial class CartItens
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,30 +23,6 @@ namespace SallesApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingCartItems");
-                });
 
             modelBuilder.Entity("SallesApp.Models.Product", b =>
                 {
@@ -117,11 +93,26 @@ namespace SallesApp.Migrations
 
             modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("SallesApp.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Navigation("Product");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ShoppingCartId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("SallesApp.Models.Product", b =>
@@ -133,6 +124,15 @@ namespace SallesApp.Migrations
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("SallesApp.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("SallesApp.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SallesApp.Models.ProductCategory", b =>

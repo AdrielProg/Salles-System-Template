@@ -15,7 +15,7 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
-builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddScoped(sc => ShoppingCartService.GetShoppingCart(sc));
 
 
 // Add services to the container.
