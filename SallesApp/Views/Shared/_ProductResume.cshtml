@@ -1,10 +1,9 @@
 ﻿@model Product
 
-<div class="col-sm-4 col-md-4 col-lg-4">
+
     <div>
         <img class="individual-product-img img-fluid" src="@Model.ImageUrl" alt="Alternate Text" />
     </div>
     <h5>@Model.Name</h5>
     <h6>@Model.Price.ToString("c")</h6>
     <p>@Model.ShortDescription</p>
-</div>

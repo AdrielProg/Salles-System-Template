@@ -6,8 +6,7 @@ namespace SallesApp.Services.Interfaces;
 public interface IShoppingCartService 
 {
   public void AddProduct(Product product);
-    public void RemoveProduct(Product product);
-    public int RemoveProduct(string productId);
+    public int RemoveProduct(Product product);
     public List<ShoppingCartItem> GetAllItens();
     decimal GetTotalPrice();
 

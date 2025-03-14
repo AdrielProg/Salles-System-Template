@@ -14,6 +14,8 @@ namespace SallesApp.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems{ get; set; }
+        public DbSet<Order> Orders{ get; set; }
+        public DbSet<OrderDetails> OrderDetails{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +31,8 @@ namespace SallesApp.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
         }
     }

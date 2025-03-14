@@ -21,6 +21,7 @@
              
 
                 builder.HasOne(p => p.ProductCategory).WithMany(p => p.Products).HasForeignKey(p => p.ProductCategoryId);
+                builder.HasMany(order => order.OrderDetails).WithOne(orderDetails => orderDetails.Product);
             }
         }
     }

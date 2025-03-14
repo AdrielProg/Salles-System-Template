@@ -1,4 +1,6 @@
-﻿namespace SallesApp.Models  
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace SallesApp.Models  
 {
     public class Product
     {
@@ -12,6 +14,7 @@
         public string ImageThumbnailUrl { get; set;}
        // public bool IsFavoriteProduct { get; set; }
         public bool IsAvailable { get; set; }
+        public List<OrderDetails> OrderDetails { get; set; }
 
         public virtual ProductCategory ProductCategory { get; set; }
     }

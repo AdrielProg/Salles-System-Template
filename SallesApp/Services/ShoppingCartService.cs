@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 
 using SallesApp.Context;
+using SallesApp.Services.Interfaces;
 
 
 namespace SallesApp.Models
 {
-    public class ShoppingCartService
+    public class ShoppingCartService : IShoppingCartService
     {
         private readonly ApplicationDbContext _context;
         public string ShoppingCartId { get; set; }

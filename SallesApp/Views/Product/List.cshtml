@@ -9,10 +9,12 @@
         <div class="row">
             @foreach (var product in Model.Products)
             {
-                <partial name="_ProductResume" for="@product" />
-             <div>
-                <a asp-controller="ShoppingCart" asp-action="AddProductToCart" asp-route-productId="@product.Id" class="btn btn-primary">Adicionar ao Carrinho @product.Id</a>
-            </div> 
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <partial name="_ProductResume" for="@product" />
+                    <div style="margin-bottom: 10px; justify-items: flex-end;" class="text-right">
+                        <a asp-controller="ShoppingCart" asp-action="AddProductToCart" asp-route-productId="@product.Id" class="btn btn-primary" style="width: 50%; height: 30px;">Adicionar ao Carrinho</a>
+                    </div>
+                </div>
             }
         </div>
     </div>

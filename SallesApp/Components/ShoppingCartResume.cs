@@ -7,9 +7,9 @@ namespace SallesApp.Components
 {
     public class ShoppingCartResume : ViewComponent
     {
-        private readonly ShoppingCart _shoppingCart;
+        private readonly ShoppingCartService _shoppingCart;
 
-        public ShoppingCartResume(ShoppingCart shoppingCart)
+        public ShoppingCartResume(ShoppingCartService shoppingCart)
         {
             _shoppingCart = shoppingCart;
         }
