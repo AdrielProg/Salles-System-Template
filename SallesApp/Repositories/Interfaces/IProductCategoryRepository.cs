@@ -5,5 +5,6 @@ namespace SallesApp.Repositories.Interfaces
     public interface IProductCategoryRepository 
     {
         IEnumerable<ProductCategory> Categories { get; }
+        string GetCurrentCategoryName(string id);
     }
 }

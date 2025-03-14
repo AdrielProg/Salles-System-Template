@@ -3,7 +3,6 @@
 
 <div class="container">
     <div class="mb-3">
-        <h4>Filtrar por categoria:</h4>
     @await Component.InvokeAsync("MenuCategory")
     </div>
     <div class="container">
@@ -11,6 +10,9 @@
             @foreach (var product in Model.Products)
             {
                 <partial name="_ProductResume" for="@product" />
+             <div>
+                <a asp-controller="ShoppingCart" asp-action="AddProductToCart" asp-route-productId="@product.Id" class="btn btn-primary">Adicionar ao Carrinho @product.Id</a>
+            </div> 
             }
         </div>
     </div>

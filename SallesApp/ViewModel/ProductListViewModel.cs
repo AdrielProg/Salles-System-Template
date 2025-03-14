@@ -8,7 +8,6 @@ namespace SallesApp.ViewModel
         public ProductListViewModel() { }
         public ProductListViewModel(Product product, IEncryptionService encryptionService)
         {
-        
             Id = encryptionService.Encrypt(product.Id.ToString());
             ProductCategoryId = product.ProductCategoryId;
             Name = product.Name;

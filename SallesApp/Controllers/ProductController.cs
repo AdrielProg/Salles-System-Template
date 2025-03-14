@@ -24,24 +24,22 @@ namespace SallesApp.Controllers
         [HttpGet]
         [Route("product/list/{categoryId?}")]
         public IActionResult List(string categoryId = null)
-        {
-            int? decryptedCategoryId = _encryptionService.TryDecryptToInt(categoryId);
-            if (categoryId != null && decryptedCategoryId == null)
-                return BadRequest("Categoria inválida.");
-
-            var products = decryptedCategoryId.HasValue
-                ? _productRepository.Products.Where(p => p.ProductCategoryId == decryptedCategoryId.Value).ToList()
-                : _productRepository.Products.ToList();
-        
-            var categories = _categoryRepository.Categories;
-            ViewBag.CurrentCategory = categories.Where(c => c.Id == decryptedCategoryId)
-                                                .Select(c => c.Name).FirstOrDefault() ?? "Todos os produtos"; 
-
+        {   
+            var products = _productRepository.GetProductsByCategoryId(categoryId);
+            if (products == null || !products.Any())
+            {
+                return NotFound("NotFound");
+            }
             var productListViewModel = new ProductListViewModel();
             productListViewModel.Products = products.Select(p => new ProductListViewModel(p, _encryptionService)).ToList();
 
+            var currentCategoryName = _categoryRepository.GetCurrentCategoryName(categoryId) ?? "Todos os produtos";
+            ViewBag.CurrentCategory = currentCategoryName;
 
-            return View(productListViewModel);
+            var viewResult = View(productListViewModel);
+            viewResult.StatusCode = 200;
+            
+            return viewResult;
         }
     }
 }

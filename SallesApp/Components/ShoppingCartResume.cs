@@ -8,17 +8,15 @@ namespace SallesApp.Components
     public class ShoppingCartResume : ViewComponent
     {
         private readonly ShoppingCart _shoppingCart;
-        private readonly IShoppingCartRepository _shoppingCartRepository;
 
-        public ShoppingCartResume(ShoppingCart shoppingCart, IShoppingCartRepository shoppingCartRepository)
+        public ShoppingCartResume(ShoppingCart shoppingCart)
         {
             _shoppingCart = shoppingCart;
-            _shoppingCartRepository = shoppingCartRepository;
         }
 
         public IViewComponentResult Invoke() 
         {
-            var itens = _shoppingCartRepository.GetAllItens(_shoppingCart.ShoppingCartId);
+            var itens = _shoppingCart.GetAllItens();
 
 /*           TEST
  *           var itens = new List<ShoppingCartItem> 
@@ -32,7 +30,7 @@ namespace SallesApp.Components
             var ShoppingCartVM = new ShoppingCartViewModel
             {
                 ShoppingCart = _shoppingCart,
-                TotalPrice = _shoppingCartRepository.GetTotalPrice(_shoppingCart.ShoppingCartId)
+                TotalPrice = _shoppingCart.GetTotalPrice()
             };
 
             return View(ShoppingCartVM);

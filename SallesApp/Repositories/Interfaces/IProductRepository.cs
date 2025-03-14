@@ -7,5 +7,7 @@ namespace SallesApp.Repositories.Interfaces
         IEnumerable<Product> Products { get; }
        // IEnumerable<Product> FavoriteProducts { get; }
         Product GetProductById(int productId);
+        List<Product> FindAllProudcts();
+        List<Product> GetProductsByCategoryId(string categoryId);
     }
 }
