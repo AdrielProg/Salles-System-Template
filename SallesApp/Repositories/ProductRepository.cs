@@ -45,6 +45,19 @@ namespace SallesApp.Repositories
             return _context.Products.Where(p => p.ProductCategoryId == decryptedCategoryId).ToList();
         }
 
-        
+        public IEnumerable<Product> SearchProducts(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return Enumerable.Empty<Product>();
+                
+            searchTerm = searchTerm.ToLower();
+            
+            return _context.Products
+                .Include(p => p.ProductCategory)
+                .Where(p => p.Name.ToLower().Contains(searchTerm) || 
+                           p.ShortDescription.ToLower().Contains(searchTerm) ||
+                           p.ProductCategory.Name.ToLower().Contains(searchTerm)) 
+                .ToList();
+        }
     }
 }

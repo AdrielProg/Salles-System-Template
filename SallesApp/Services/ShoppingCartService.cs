@@ -36,6 +36,10 @@ namespace SallesApp.Models
                  ShoppingCartId = cartId 
             };
         }
+
+        public string GetShoppingCartId() {
+            return ShoppingCartId;
+        }
            
         public void AddProduct(Product product)
         {

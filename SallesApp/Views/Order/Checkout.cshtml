@@ -1,0 +1,58 @@
+@model CheckoutViewModel
+
+<h3>Finalizar Pedido</h3>
+<hr />
+
+<form asp-action="CompleteOrder" method="post" class="form-horizontal" role="form">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Dados do Pedido</h4>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Order.CustomerName" class="control-label">Nome</label>
+                <input asp-for="Order.CustomerName" class="form-control" />
+                <span asp-validation-for="Order.CustomerName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Order.Address" class="control-label">Endereço</label>
+                <input asp-for="Order.Address" class="form-control" />
+                <span asp-validation-for="Order.Address" class="text-danger"></span>
+            </div>
+            
+            <!-- Add other fields as needed -->
+            
+            <div class="form-group mb-3">
+                <label asp-for="Order.Email" class="control-label">Email</label>
+                <input asp-for="Order.Email" class="form-control" />
+                <span asp-validation-for="Order.Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Order.Phone" class="control-label">Telefone</label>
+                <input asp-for="Order.Phone" class="form-control" />
+                <span asp-validation-for="Order.Phone" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <h4>Resumo do Pedido</h4>
+            <partial name="_CartReviewPartial" model="@Model.CartViewModel"/>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <a> 
+                <input class="btn btn-success" type="submit" value="Corfirmar Pedido"/>
+            </a> 
+            <a asp-controller="Product" asp-action="List">
+                <input class="btn btn-primary" asp-controller="Product" asp-action="List" value="Continue-Comprando" /> 
+            </a>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</form>
+

@@ -1,48 +1,65 @@
 ﻿@model ShoppingCartViewModel
 
+@{
+    ViewData["Title"] = "Carrinho de Compras";
+}
+
 <div class="container">
     <div class="row">
+        <div class="col">
+            <h3>Seu Carrinho</h3>
+        </div>
+    </div>
 
-        <div>Seu Carrinho</div>
-
-       <table class="table table-bordered table-striped">
-            <thead>
-               <tr>
-                    <th>Quantidade</th>
-                    <th>Lanche</th>
-                    <th class="text-right">Preco</th>
-                    <th class="text-right">SubTotal</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ShoppingCart.shoppingCartItens)
-                {
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
                     <tr>
-                        <td class="text-center" >@item.Quantity</td>
-                        <td class="text-left" >@item.Product.Name</td>
-                        <td class="text-right" >@item.Product.Price</td>
-                        <td class="text-right" >@((item.Product.Price * item.Quantity).ToString("c"))</td>
-                        <td class="text-center text-black">
-                            <a asp-controller="ShoppingCart" asp-action="RemoveProductToCart"
-                             asp-route-productId="@item.Product.Id" class="text-black">X</a>
-                        </td>
+                        <th>Quantidade</th>
+                        <th>Lanche</th>
+                        <th class="text-right">Preco</th>
+                        <th class="text-right">SubTotal</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">Total</td>
-                    <td>@Model.TotalPrice.ToString("c")</td>
-                </tr>
-            </tfoot>    
-        </table>
-        <div class="text-right">
-            <div class="btn-group">
-                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Encerrar Pedido</a>
-                &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-primary" asp-controller="Product" asp-action="List">Continuar Comprando</a>
-            </div>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ShoppingCart.shoppingCartItens)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Quantity</td>
+                            <td class="text-left">@item.Product.Name</td>
+                            <td class="text-right">@item.Product.Price</td>
+                            <td class="text-right">@((item.Product.Price * item.Quantity).ToString("c"))</td>
+                            <td class="text-center text-black">
+                                <a asp-controller="ShoppingCart" asp-action="RemoveProductToCart"
+                                 asp-route-productId="@item.Product.Id" class="text-black">X</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total</td>
+                        <td>@Model.TotalPrice.ToString("c")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-between">
+            <a asp-controller="Product" asp-action="List" class="btn btn-success">
+                Continuar Comprando
+            </a>
+            
+            @if (Model.ShoppingCart.shoppingCartItens.Count > 0)
+            {
+                <a asp-controller="Order" asp-action="Checkout" class="btn btn-primary">
+                    Encerrar Pedido
+                </a>
+            }
         </div>
     </div>
 </div>

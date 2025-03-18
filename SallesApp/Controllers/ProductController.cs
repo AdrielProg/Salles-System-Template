@@ -36,10 +36,29 @@ namespace SallesApp.Controllers
             var currentCategoryName = _categoryRepository.GetCurrentCategoryName(categoryId) ?? "Todos os produtos";
             ViewBag.CurrentCategory = currentCategoryName;
 
-            var viewResult = View(productListViewModel);
-            viewResult.StatusCode = 200;
-            
+            var viewResult = View(productListViewModel);            
             return viewResult;
+        }
+    
+        public ViewResult Search(string searchTerm)
+        {
+            var products = _productRepository.SearchProducts(searchTerm);
+            var productListViewModel = new ProductListViewModel();
+            
+            productListViewModel.Products = products.Select(p => new ProductListViewModel(p, _encryptionService)).ToList();
+            ViewBag.CurrentCategory = "Resultados para: " + searchTerm;
+
+            if (productListViewModel.Products == null || !productListViewModel.Products.Any())
+            {
+                ViewBag.CurrentCategory = "Nenhum resultado encontrado para: " + searchTerm;
+                return View("List", productListViewModel);
+            }
+            return View("List", productListViewModel);
+        }
+
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }
