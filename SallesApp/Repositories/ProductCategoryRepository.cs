@@ -16,7 +16,7 @@ namespace SallesApp.Repositories
         }
         public IEnumerable<ProductCategory> Categories => _context.ProductCategories;
 
-        public string? GetCurrentCategoryName (string id)
+        public string GetCurrentCategoryName (string id)
         {
             if (string.IsNullOrEmpty(id))
                 return null;

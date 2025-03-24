@@ -6,15 +6,9 @@
     @await Html.PartialAsync("_Login")
 </div>
 
-<a href="javascript:void(0);" onclick="loadPartialView('Register')">Register</a>
-<a href="javascript:void(0);" onclick="loadPartialView('ChangePassword')">Change Password</a>
+<a href="javascript:void(0);" onclick="login.loadPartialView('@Url.Action("RenderPartialView", "Account")', 'Register')">Register</a>
+<a href="javascript:void(0);" onclick="login.loadPartialView('@Url.Action("RenderPartialView", "Account")', 'ChangePassword')">Change Password</a>
 
 @section Scripts {
-    <script>
-        function loadPartialView(viewName) {
-            $.get('@Url.Action("RenderPartialView", "Account")', { viewName: viewName }, function (data) {
-                $('#partialViewContainer').html(data);
-            });
-        }
-    </script>
+    <script src="/js/login.js"></script>
 }
