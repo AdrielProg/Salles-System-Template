@@ -5,18 +5,24 @@
 }
 <h2>@ViewData["Title"]</h2>
 
-<div asp-validate-summary="All" class="text-danger"></div>
 <input type="hidden" asp-for="ReturnUrl" />
-<form asp-controller="Account" asp-action="Login" method="post" role="form">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+<form asp-controller="Account" asp-action="Login" method="post" role="form"
+     class="uk-form-stacked uk-margin-top">
+    <div class="uk-margin">
+        <label asp-for="Email" class="uk-margin-bottom-small" ></label>
+        <div class="uk-form-controls uk-margin-small-top">
+            <input asp-for="Email" class="uk-input uk-width-1-1" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+    <div class="uk-margin">
+        <label asp-for="Password" class="uk-margin-bottom-small" ></label>
+        <div class="uk-form-controls uk-margin-small-top">
+            <input asp-for="Password" class="uk-input uk-input-small uk-width-1-1" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
     </div>
-    <input type="submit" class="btn btn-sucess" value="Login" />
+    <div class="uk-text-right">
+        <button type="submit" class="uk-button uk-button-default uk-margin-top">Login</button>
+    </div>
 </form>

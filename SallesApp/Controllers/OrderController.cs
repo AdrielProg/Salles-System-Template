@@ -6,16 +6,10 @@ using SallesApp.ViewModel;
 
 namespace SallesApp.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController(IOrderRepository orderRepository, ShoppingCartService shoppingCartService) : Controller
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly ShoppingCartService _shoppingCartService;
-
-        public OrderController(IOrderRepository orderRepository, ShoppingCartService shoppingCartService)
-        {
-            _orderRepository = orderRepository;
-            _shoppingCartService = shoppingCartService;
-        }
+        private readonly IOrderRepository _orderRepository = orderRepository;
+        private readonly ShoppingCartService _shoppingCartService = shoppingCartService;
 
         public IActionResult Checkout()
         {

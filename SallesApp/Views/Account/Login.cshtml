@@ -1,14 +1,16 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-<div id="partialViewContainer">
-    @await Html.PartialAsync("_Login")
-</div>
-
-<a href="javascript:void(0);" onclick="login.loadPartialView('@Url.Action("RenderPartialView", "Account")', 'Register')">Register</a>
-<a href="javascript:void(0);" onclick="login.loadPartialView('@Url.Action("RenderPartialView", "Account")', 'ChangePassword')">Change Password</a>
-
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <div class="uk-height-1-1 uk-flex uk-flex-center uk-flex-middle uk-margin-top">
+        <div id="partialViewContainer" class="uk-card uk-width-1-3 uk-card-secondary uk-card-body">
+            @await Html.PartialAsync("_Login")
+        
+            <a asp-controller="Account" asp-action="Register" class="uk-text-decoration-none uk-margin-small-right" >Cadastrar</a>
+            <a href="javascript:void(0);" class="uk-text-decoration-none" 
+                onclick="login.loadPartialView('@Url.Action("RenderPartialView", "Account")', 'ChangePassword')">Mudar Senha</a>
+        </div>
+    </div>
 @section Scripts {
     <script src="/js/login.js"></script>
 }

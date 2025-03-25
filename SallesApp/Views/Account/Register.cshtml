@@ -1,0 +1,53 @@
+@model SallesApp.ViewModel.Login.LoginViewModel
+@{
+    ViewData["Title"] = "Sing In";
+}
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+
+<div class="uk-height-1-1 uk-flex uk-flex-center uk-flex-middle uk-margin-top">
+    <div id="partialViewContainer" class="uk-card uk-width-1-3 uk-card-secondary uk-card-body">
+        <h2>@ViewData["Title"]</h2>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <form class="uk-card" asp-controller="Account" asp-action="Register" method="post" role="form">
+            <div class="uk-margin">
+                <label asp-for="Name" class="uk-margin-bottom-small" ></label>
+                <div class="uk-form-controls uk-margin-small-top">
+                    <input asp-for="Name" class="uk-input uk-width-1-1" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label asp-for="Email" class="uk-margin-bottom-small" ></label>
+                <div class="uk-form-controls uk-margin-small-top">
+                    <input asp-for="Email" class="uk-input uk-width-1-1" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label asp-for="Password" class="uk-margin-bottom-small" ></label>
+                <div class="uk-form-controls uk-margin-small-top">
+                    <input asp-for="Password" class="uk-input uk-width-1-1" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label asp-for="ConfirmPassword" class="uk-margin-bottom-small" ></label>
+                <div class="uk-form-controls uk-margin-small-top">
+                    <input asp-for="ConfirmPassword" class="uk-input uk-width-1-1" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="uk-text-right">
+                 <button type="submit" class="uk-button uk-button-default uk-margin-top">Cadastrar</button>
+            </div>
+        </form>
+        <div class="uk-width-1-1 uk-text-center">
+            <a asp-controller="Account" asp-action="Login" class="uk-text-decoration-none" >Voltar ao login</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="/js/login.js"></script>
+}

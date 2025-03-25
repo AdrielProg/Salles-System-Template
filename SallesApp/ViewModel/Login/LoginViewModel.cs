@@ -5,6 +5,10 @@ namespace SallesApp.ViewModel.Login;
 
     public class LoginViewModel
     {
+    [Required(ErrorMessage = "Informe seu nome:")]
+    [DisplayName("Nome Completo")]
+    public string Name  { get; set; }
+
     [Required(ErrorMessage = "Informe o nome do usuário")]
     [DataType(DataType.EmailAddress)]
     [DisplayName("Email")]
@@ -21,5 +25,11 @@ namespace SallesApp.ViewModel.Login;
     [Display(Name = "Confirme a senha")]
     public string ConfirmPassword { get; set; }
     public string ReturnUrl { get; set; }
+
+    public string GetFirstName() => Name.Split(' ')[0]?? "";
+
+    public bool IsLoginValid() => !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
+    public bool IsRegisterValid () => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email) 
+                                    && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(ConfirmPassword) && Password == ConfirmPassword;
 }
 

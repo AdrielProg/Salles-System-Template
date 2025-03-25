@@ -3,28 +3,17 @@ using SallesApp.Models;
 using SallesApp.Repositories.Interfaces;
 using SallesApp.Services.Interfaces;
 using SallesApp.ViewModel;
-using System;
-using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace SallesApp.Controllers
 {
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController(
+        IEncryptionService encryptionService,
+        IProductRepository productRepository,
+        ShoppingCartService shoppingCart) : Controller
     {
-        private readonly ShoppingCartService _shoppingCart;
-        private readonly IEncryptionService _encryptionService;
-        private readonly IProductRepository _productRepository;
-
-        public ShoppingCartController(
-            IEncryptionService encryptionService, 
-            IProductRepository productRepository,
-            IServiceProvider serviceProvider, 
-            ShoppingCartService shoppingCart)
-        {
-            _shoppingCart = shoppingCart;
-            _encryptionService = encryptionService;
-            _productRepository = productRepository;
-        }
+        private readonly ShoppingCartService _shoppingCart = shoppingCart;
+        private readonly IEncryptionService _encryptionService = encryptionService;
+        private readonly IProductRepository _productRepository = productRepository;
 
         public IActionResult Index()
         { 

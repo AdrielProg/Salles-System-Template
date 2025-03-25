@@ -6,21 +6,15 @@ using SallesApp.Models;
 
 namespace SallesApp.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController(
+        IProductRepository productRepository,
+        IProductCategoryRepository categoryRepository,
+        IEncryptionService encryptionService) : Controller
     {
-        private readonly IProductRepository _productRepository;
-        private readonly IProductCategoryRepository _categoryRepository;
-        private readonly IEncryptionService _encryptionService;
+        private readonly IProductRepository _productRepository = productRepository;
+        private readonly IProductCategoryRepository _categoryRepository = categoryRepository;
+        private readonly IEncryptionService _encryptionService = encryptionService;
 
-        public ProductController(
-            IProductRepository productRepository,
-            IProductCategoryRepository categoryRepository,
-            IEncryptionService encryptionService)
-        {
-            _productRepository = productRepository;
-            _categoryRepository = categoryRepository;
-            _encryptionService = encryptionService;
-        }
         [HttpGet]
         [Route("product/list/{categoryId?}")]
         public IActionResult List(string categoryId = null)

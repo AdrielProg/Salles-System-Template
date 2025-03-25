@@ -26,6 +26,12 @@ var login = (function () {
         });
     }
 
+    function loadView (url) {
+        $.get(url, function (data) {
+            $("#mainContainer").html(data);
+        });
+    }
+
     return {
         loadPartialView: loadPartialView,
         checkEmail: checkEmail,
