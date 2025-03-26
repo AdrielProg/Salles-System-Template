@@ -1,0 +1,10 @@
+@model Product
+
+<div class="uk-text-default">
+    <div>
+        <img class="individual-product-img img-fluid" src="@Model.ImageUrl" alt="Alternate Text" />
+    </div>
+    <h5 class="uk-text-large" style="margin: 10px 0;">@Model.Name</h5>
+    <span class="uk-text-bold uk-display-block text-price" >@Model.Price.ToString("c")</span>
+    <span class="uk-display-block text-description">@Model.ShortDescription</span>
+</div>

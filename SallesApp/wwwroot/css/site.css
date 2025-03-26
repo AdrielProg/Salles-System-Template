@@ -17,6 +17,16 @@ html {
   min-height: 100%;
 }
 
+.icon-user-btn {
+  color: white  !important;
+  background-color: #393939;
+}
+
+.text-description, .text-price {
+    color: #393939;
+    line-height: 30px;
+}
+
 body {
   margin-bottom: 60px;
 }

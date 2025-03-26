@@ -10,7 +10,7 @@
             @foreach (var product in Model.Products)
             {
                 <div class="col-sm-4 col-md-4 col-lg-4">
-                    <partial name="_ProductResume" for="@product" />
+                    <partial name="_ProductDetails" for="@product" />
                     <div style="margin-bottom: 10px; justify-items: flex-end;" class="text-right">
                         <a asp-controller="ShoppingCart" asp-action="AddProductToCart" asp-route-productId="@product.Id" class="btn btn-primary" style="width: 50%; height: 30px;">Adicionar ao Carrinho</a>
                     </div>

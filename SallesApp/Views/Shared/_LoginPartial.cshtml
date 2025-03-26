@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager;
+
+<div class="uk-inline">
+    <button class="uk-button icon-user-btn" type="button">
+        <span uk-icon="icon: user; ratio: 1.1;"></span>
+    </button>
+    <div uk-dropdown="mode: click">
+        <ul class="uk-nav uk-dropdown-nav">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="uk-nav-header">Olá, @User.Identity.Name</li>
+                <li class="uk-nav-divider"></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                        <button type="submit" class="uk-button uk-button-default uk-text-secondary">
+                            <span uk-icon="sign-out"></span> Logout
+                        </button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="Account" asp-action="Login" class="uk-text-secundary">
+                        <span uk-icon="sign-in"></span> Login
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Account" asp-action="Register" class="uk-text-secundary">
+                        <span uk-icon="user"></span> Register
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
